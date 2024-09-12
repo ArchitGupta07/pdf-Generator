@@ -3,7 +3,7 @@
 ### 1. Clone the repository
 
 ```Terminal
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/your-username/pdf-Generator.git
 cd your-repo-name
 ```
 
