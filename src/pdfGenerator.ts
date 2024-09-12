@@ -982,6 +982,11 @@ async function createPdfPage() {
 
   //   ========================================Table Ends =============================================
   //   ========================================Table heading=============================================
+  let headx4 = await pdf_obj.getTextWidth(
+    font,
+    "Servicing Provider/Facility Information",
+    fontSize
+  );
   pdf_obj.createCell(
     page,
     tableMarginL,
@@ -991,16 +996,11 @@ async function createPdfPage() {
     undefined,
     rgb(144 / 255, 180 / 255, 228 / 255)
   );
-  let headx4 = await pdf_obj.getTextWidth(
-    font,
-    "Servicing Provider/Facility Information",
-    fontSize
-  );
   pdf_obj.drawTextOnPage(
     page,
     "Servicing Provider/Facility Information",
     typeof width === "number" && typeof headx1 === "number"
-      ? (width - headx3) / 2
+      ? (width - headx4) / 2
       : 0,
     currentheight - (23 - fontSize),
     fontSize,

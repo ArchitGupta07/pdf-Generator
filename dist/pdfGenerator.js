@@ -531,10 +531,10 @@ function createPdfPage() {
         currentheight -= 20;
         //   ========================================Table Ends =============================================
         //   ========================================Table heading=============================================
-        pdf_obj.createCell(page, tableMarginL, currentheight, width - 69, cellHeight, undefined, (0, pdf_lib_1.rgb)(144 / 255, 180 / 255, 228 / 255));
         let headx4 = yield pdf_obj.getTextWidth(font, "Servicing Provider/Facility Information", fontSize);
+        pdf_obj.createCell(page, tableMarginL, currentheight, width - 69, cellHeight, undefined, (0, pdf_lib_1.rgb)(144 / 255, 180 / 255, 228 / 255));
         pdf_obj.drawTextOnPage(page, "Servicing Provider/Facility Information", typeof width === "number" && typeof headx1 === "number"
-            ? (width - headx3) / 2
+            ? (width - headx4) / 2
             : 0, currentheight - (23 - fontSize), fontSize, boldFont);
         currentheight -= 20;
         //   ========================================Table 5 heading end =============================================
