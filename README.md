@@ -30,5 +30,5 @@ This will generate a `dist/` folder containing the compiled JavaScript files.
 After compiling the TypeScript code, you can run the project using:
 
 ```bash
-npm run dev
+npm run start
 ```
