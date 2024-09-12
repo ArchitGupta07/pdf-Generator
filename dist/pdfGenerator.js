@@ -102,44 +102,6 @@ class Pdf {
             return yield font.widthOfTextAtSize(text, fontSize);
         });
     }
-    drawTable(page, rows, // Array of arrays containing row data
-    columnWidths, // Array specifying the width of each column
-    rowHeight, // Height of each row
-    x, // Starting X position
-    y, // Starting Y position (from top of the page)
-    font, fontSize) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let currentY = y;
-            // Iterate over each row
-            rows.forEach((row) => {
-                let currentX = x;
-                // Iterate over each column in the row
-                row.forEach((cellText, index) => {
-                    const cellWidth = columnWidths[index];
-                    // Draw cell border (rectangle)
-                    page.drawRectangle({
-                        x: currentX,
-                        y: currentY - rowHeight,
-                        width: cellWidth,
-                        height: rowHeight,
-                        borderColor: (0, pdf_lib_1.rgb)(0, 0, 0),
-                        borderWidth: 1,
-                    });
-                    // Draw the text inside the cell
-                    page.drawText(cellText, {
-                        x: currentX + 5, // Small padding inside the cell
-                        y: currentY - rowHeight + 10,
-                        size: fontSize,
-                        font: font,
-                    });
-                    // Move to the next column (shift X by column width)
-                    currentX += cellWidth;
-                });
-                // Move to the next row (shift Y down by row height)
-                currentY -= rowHeight;
-            });
-        });
-    }
 }
 function createPdfPage() {
     return __awaiter(this, void 0, void 0, function* () {

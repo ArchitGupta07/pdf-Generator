@@ -100,53 +100,6 @@ class Pdf {
   ): Promise<number> {
     return await font.widthOfTextAtSize(text, fontSize);
   }
-
-  async drawTable(
-    page: PDFPage,
-    rows: string[][], // Array of arrays containing row data
-    columnWidths: number[], // Array specifying the width of each column
-    rowHeight: number, // Height of each row
-    x: number, // Starting X position
-    y: number, // Starting Y position (from top of the page)
-    font: any,
-    fontSize: number
-  ) {
-    let currentY = y;
-
-    // Iterate over each row
-    rows.forEach((row) => {
-      let currentX = x;
-
-      // Iterate over each column in the row
-      row.forEach((cellText, index) => {
-        const cellWidth = columnWidths[index];
-
-        // Draw cell border (rectangle)
-        page.drawRectangle({
-          x: currentX,
-          y: currentY - rowHeight,
-          width: cellWidth,
-          height: rowHeight,
-          borderColor: rgb(0, 0, 0),
-          borderWidth: 1,
-        });
-
-        // Draw the text inside the cell
-        page.drawText(cellText, {
-          x: currentX + 5, // Small padding inside the cell
-          y: currentY - rowHeight + 10,
-          size: fontSize,
-          font: font,
-        });
-
-        // Move to the next column (shift X by column width)
-        currentX += cellWidth;
-      });
-
-      // Move to the next row (shift Y down by row height)
-      currentY -= rowHeight;
-    });
-  }
 }
 
 async function createPdfPage() {
