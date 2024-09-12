@@ -187,12 +187,12 @@ async function createPdfPage() {
   currentheight = currentheight - cellHeight * 5;
   const memberInfoBoxY = currentheight;
   const memberInfoBoxX = tableMarginL;
-  const memberInfoWidth = width - 2 * memberInfoBoxX + 10;
+  const memberInfoWidth = width - 2 * memberInfoBoxX;
 
   page.drawRectangle({
     x: memberInfoBoxX,
     y: memberInfoBoxY + cellHeight * 4,
-    width: memberInfoWidth,
+    width: memberInfoWidth + 10,
     height: cellHeight,
     color: rgb(144 / 255, 180 / 255, 228 / 255),
     borderColor: rgb(0, 0, 0),
@@ -206,7 +206,7 @@ async function createPdfPage() {
   page.drawRectangle({
     x: memberInfoBoxX,
     y: memberInfoBoxY,
-    width: memberInfoWidth,
+    width: memberInfoWidth + 10,
     height: cellHeight * 5,
     borderColor: rgb(0, 0, 0),
     borderWidth: 1,
@@ -217,15 +217,18 @@ async function createPdfPage() {
   drawLinesInBox(
     page,
     { x: memberInfoBoxX, y: memberInfoBoxY },
-    { x: memberInfoWidth + memberInfoBoxX, y: memberInfoBoxY },
+    { x: memberInfoWidth + memberInfoBoxX + 10, y: memberInfoBoxY },
     4,
     cellHeight
   );
 
   page.drawLine({
-    start: { x: (memberInfoWidth + memberInfoBoxX) / 2, y: memberInfoBoxY },
+    start: {
+      x: (memberInfoWidth + 10) / 2 + memberInfoBoxX,
+      y: memberInfoBoxY,
+    },
     end: {
-      x: (memberInfoWidth + memberInfoBoxX) / 2,
+      x: (memberInfoWidth + 10) / 2 + memberInfoBoxX,
       y: memberInfoBoxY + 4 * cellHeight,
     },
   });
@@ -265,7 +268,7 @@ async function createPdfPage() {
   text = "Member Information";
   let newtextWidth = await pdf_obj.getTextWidth(font, text, fontSize);
   page.drawText(text, {
-    x: (memberInfoWidth + memberInfoBoxX) / 2 - newtextWidth / 2,
+    x: (memberInfoWidth + 10) / 2 + memberInfoBoxX - newtextWidth / 2,
     y: memberInfoBoxY + cellHeight * 4 + 6,
     size: fontSize,
     font: boldFont,
@@ -293,7 +296,7 @@ async function createPdfPage() {
 
   text = "DOB :";
   page.drawText(text, {
-    x: (memberInfoWidth + memberInfoBoxX) / 2 + 2,
+    x: (memberInfoWidth + 10) / 2 + memberInfoBoxX + paddinL,
     y: memberInfoBoxY + cellHeight * 2 + 2,
     size: fontSize,
     font: font,
@@ -321,7 +324,7 @@ async function createPdfPage() {
 
   text = "Member Phone Number : ";
   page.drawText(text, {
-    x: (memberInfoWidth + memberInfoBoxX) / 2 + 2,
+    x: (memberInfoWidth + 10) / 2 + memberInfoBoxX + paddinL,
     y: memberInfoBoxY + cellHeight + 2,
     size: fontSize,
     font: font,
@@ -338,7 +341,7 @@ async function createPdfPage() {
   });
 
   page.drawText("Elective/Routine", {
-    x: ((memberInfoWidth + memberInfoBoxX) / 2) * (2 / 5) + 30,
+    x: ((memberInfoWidth + memberInfoBoxX) / 2) * (2 / 5) + 20,
     y: memberInfoBoxY + 2,
     size: fontSize,
     font: font,
@@ -346,7 +349,7 @@ async function createPdfPage() {
   });
 
   page.drawText("Expedited/Urgent", {
-    x: (memberInfoWidth + memberInfoBoxX) / 2 + 30,
+    x: (memberInfoWidth + 10) / 2 + memberInfoBoxX + paddinL + 20,
     y: memberInfoBoxY + 2,
     size: fontSize,
     font: font,
@@ -357,7 +360,7 @@ async function createPdfPage() {
   // Add a checkbox for 'Elective/Routine'
   const electiveRoutineCheckBox = form.createCheckBox("electiveRoutine");
   electiveRoutineCheckBox.addToPage(page, {
-    x: ((memberInfoWidth + memberInfoBoxX) / 2) * (2 / 5) + 15,
+    x: ((memberInfoWidth + memberInfoBoxX) / 2) * (2 / 5) + 5,
     y: memberInfoBoxY + 2,
     width: 12,
     height: 12,
@@ -366,7 +369,7 @@ async function createPdfPage() {
   // Add a checkbox for 'Elective/Routine'
   const expeditedUrgentCheckBox = form.createCheckBox("urgentRoutine");
   expeditedUrgentCheckBox.addToPage(page, {
-    x: (memberInfoWidth + memberInfoBoxX) / 2 + 15,
+    x: (memberInfoWidth + 10) / 2 + memberInfoBoxX + paddinL + 5,
     y: memberInfoBoxY + 2,
     width: 12,
     height: 12,
