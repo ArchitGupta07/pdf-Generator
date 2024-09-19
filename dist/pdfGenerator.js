@@ -494,7 +494,37 @@ function createPdfPage() {
         pdf_obj.createCell(page, tableMarginL + currentWidth * (6 / 9), currentheight, currentWidth * (3 / 9), cellHeight);
         pdf_obj.drawTextOnPage(page, "", tableMarginL + paddinL + currentWidth * (6 / 9), currentheight - (23 - fontSize), fontSize, font);
         currentheight -= 20;
-        //   ========================================Table heading=============================================
+        const part2 = 1 / 3;
+        const table4 = {
+            row1: {
+                "*Name:": 0.667,
+                "": part2,
+            },
+            row2: {
+                "*Address:": 0.667,
+                "Contact Name:": 0.333,
+            },
+            row3: {
+                "*Servicing NPI: ": part2,
+                "*Phone No: ": part2,
+                "*Fax No: ": part2,
+            },
+            row4: {
+                "*Billing TIN:": part2,
+                "": part2,
+                " ": part2,
+            },
+        };
+        Object.keys(table4).forEach((key, indx) => {
+            var oldValue = 0;
+            Object.entries(table4[key]).forEach(([key, value], indx) => {
+                pdf_obj.createCell(page, tableMarginL + currentWidth * oldValue, currentheight, currentWidth * value, cellHeight);
+                pdf_obj.drawTextOnPage(page, key, tableMarginL + paddinL + currentWidth * oldValue, currentheight - (23 - fontSize), fontSize, font);
+                oldValue += value;
+            });
+            currentheight -= 20;
+        });
+        //   ========================================Table 4 heading=============================================
         pdf_obj.createCell(page, tableMarginL, currentheight, width - 69, cellHeight, undefined, (0, pdf_lib_1.rgb)(144 / 255, 180 / 255, 228 / 255));
         let headx3 = yield pdf_obj.getTextWidth(font, "Requesting Provider Information", fontSize);
         pdf_obj.drawTextOnPage(page, "Requesting Provider Information", typeof width === "number" && typeof headx1 === "number"
@@ -532,8 +562,40 @@ function createPdfPage() {
         pdf_obj.createCell(page, tableMarginL + currentWidth * (2 / 3), currentheight, currentWidth * (1 / 3), cellHeight);
         pdf_obj.drawTextOnPage(page, "", tableMarginL + paddinL + currentWidth * (2 / 3), currentheight - (23 - fontSize), fontSize, font);
         currentheight -= 20;
-        //   ========================================Table Ends =============================================
-        //   ========================================Table heading=============================================
+        const part = 1 / 3;
+        const table5 = {
+            row1: {
+                "*Name:": 0.667,
+                "": part,
+            },
+            row2: {
+                "*Address:": 0.667,
+                "Contact Name:": 0.333,
+            },
+            row3: {
+                "*Servicing NPI: ": part,
+                "*Phone No: ": part,
+                "*Fax No: ": part,
+            },
+            row4: {
+                "*Servicing TIN: ": 0.667,
+                "": part,
+            },
+            row5: {
+                "": 0.667,
+                " ": part,
+            },
+        };
+        Object.keys(table5).forEach((key, indx) => {
+            var oldValue = 0;
+            Object.entries(table5[key]).forEach(([key, value], indx) => {
+                pdf_obj.createCell(page, tableMarginL + currentWidth * oldValue, currentheight, currentWidth * value, cellHeight);
+                pdf_obj.drawTextOnPage(page, key, tableMarginL + paddinL + currentWidth * oldValue, currentheight - (23 - fontSize), fontSize, font);
+                oldValue += value;
+            });
+            currentheight -= 20;
+        });
+        //   ========================================Table 5 heading=============================================
         let headx4 = yield pdf_obj.getTextWidth(font, "Servicing Provider/Facility Information", fontSize);
         pdf_obj.createCell(page, tableMarginL, currentheight, width - 69, cellHeight, undefined, (0, pdf_lib_1.rgb)(144 / 255, 180 / 255, 228 / 255));
         pdf_obj.drawTextOnPage(page, "Servicing Provider/Facility Information", typeof width === "number" && typeof headx1 === "number"
@@ -544,7 +606,7 @@ function createPdfPage() {
         //   ===========================================================================================================
         //   ========================================Table 5 Starts =============================================
         //   row1------------------
-        pdf_obj.createCell(page, 40, currentheight, currentWidth * (2 / 3), 20);
+        pdf_obj.createCell(page, 40, currentheight, currentWidth * (2 / 3), cellHeight);
         pdf_obj.drawTextOnPage(page, "*Name:", tableMarginL + paddinL, currentheight - (23 - fontSize), fontSize, font);
         pdf_obj.createCell(page, tableMarginL + currentWidth * (2 / 3), currentheight, currentWidth * (1 / 3), cellHeight);
         pdf_obj.drawTextOnPage(page, "", tableMarginL + paddinL + currentWidth * (2 / 3), currentheight - (23 - fontSize), fontSize, font);
@@ -556,7 +618,7 @@ function createPdfPage() {
         pdf_obj.drawTextOnPage(page, "Contact Name:", tableMarginL + paddinL + currentWidth * (2 / 3), currentheight - (23 - fontSize), fontSize, font);
         currentheight -= 20;
         //   row3--------------------------------------------------------------------------------------
-        pdf_obj.createCell(page, 40, currentheight, currentWidth * (1 / 3), 20);
+        pdf_obj.createCell(page, tableMarginL, currentheight, currentWidth * (1 / 3), cellHeight);
         pdf_obj.drawTextOnPage(page, "*Servicing NPI: ", tableMarginL + paddinL, currentheight - (23 - fontSize), fontSize, font);
         pdf_obj.createCell(page, tableMarginL + currentWidth * (1 / 3), currentheight, currentWidth * (1 / 3), cellHeight);
         pdf_obj.drawTextOnPage(page, "*Phone No: ", tableMarginL + paddinL + currentWidth * (1 / 3), currentheight - (23 - fontSize), fontSize, font);
